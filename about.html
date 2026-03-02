@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>About &amp; Contact | Bahari Ponno</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0ced5b",
+                        "background-light": "#FCFAF7",
+                        "background-dark": "#102216",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem", // Approx 12px as requested
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .warm-ivory {
+            background-color: #FCFAF7;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+    <!-- Top Navigation -->
+    <header
+        class="sticky top-0 z-50 w-full border-b border-primary/10 bg-background-light/80 backdrop-blur-md dark:bg-background-dark/80 px-6 lg:px-20 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="bg-primary p-2 rounded-lg">
+                    <span class="material-symbols-outlined text-background-dark">eco</span>
+                </div>
+                <h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Bahari <span
+                        class="text-primary">Ponno</span></h1>
+            </a>
+            <nav class="hidden md:flex items-center gap-10">
+                <a class="text-sm font-semibold hover:text-primary transition-colors" href="index.html">Shop</a>
+                <a class="text-sm font-semibold text-primary" href="about.html">Our Story</a>
+                <a class="text-sm font-semibold hover:text-primary transition-colors" href="#regions">Regions</a>
+                <a class="text-sm font-semibold hover:text-primary transition-colors" href="#contact">Contact</a>
+                <a class="nav-login-link text-sm font-semibold hover:text-primary transition-colors"
+                    href="auth.html">Login/Register</a>
+                <span class="nav-user-menu hidden text-sm font-semibold text-slate-700 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-base">account_circle</span>
+                    <span class="nav-user-name"></span>
+                    <button onclick="UserAPI.logout()"
+                        class="ml-2 text-xs text-red-400 hover:text-red-600">(Logout)</button>
+                </span>
+            </nav>
+            <div class="flex items-center gap-4">
+                <button class="md:hidden p-2 text-slate-700 dark:text-slate-300 hover:text-primary transition-colors"
+                    onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <a href="checkout.html"
+                    class="relative p-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition-all">
+                    <span class="material-symbols-outlined text-forest">shopping_cart</span>
+                    <span
+                        class="cart-badge absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-slate-900">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu"
+        class="hidden md:hidden bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-primary/10 px-6 py-4 space-y-4 fixed top-[4.5rem] w-full z-40 shadow-md">
+        <a class="block py-2 text-base font-semibold hover:text-primary transition-colors" href="index.html">Shop</a>
+        <a class="block py-2 text-base font-semibold text-primary" href="about.html">Our Story</a>
+        <a class="block py-2 text-base font-semibold hover:text-primary transition-colors" href="#regions">Regions</a>
+        <a class="block py-2 text-base font-semibold hover:text-primary transition-colors" href="#contact">Contact</a>
+    </div>
+    <!-- Hero Section -->
+    <section class="relative w-full h-[600px] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center"
+            data-alt="Lush rolling green hills of a tea garden in Sreemangal at sunrise"
+            style='background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuC2G88a6-wdX8e6XeYdF57FgpFpCrbQFZGMx_IWi0HcTtO_rteew_qRU3HzDGG-4rixChtS_bYL3ANv-aGDAlHb_5Py-2WCb8SJ5_McgQSJX1QwdAW3KmQ_y0S_Tys7XCLQk03zNvTtJcphHOE9UB7OeRIz0Ve3EP293AbyU0xVzpP_YV9XIPW0zWlTRBgbkayH-lpGTQ5naSylybnAYcGQncvho1yUzhTEjccf7dMwZQt7q4g36CTvmG_0f-I9onAH3-cgMhjNGcjm");'>
+        </div>
+        <div class="relative z-10 text-center px-6 max-w-4xl">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">The Essence of Bengal</h1>
+            <p class="text-xl text-white/90 font-medium leading-relaxed">A tribute to Sreemangal’s rolling hills and the
+                heritage of premium Bangladeshi tea.</p>
+        </div>
+    </section>
+    <!-- Story Section -->
+    <section class="py-24 px-6 lg:px-20 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="relative group">
+                <div
+                    class="absolute -inset-4 bg-primary/10 rounded-xl -rotate-2 group-hover:rotate-0 transition-transform">
+                </div>
+                <div class="relative w-full aspect-[4/5] bg-cover bg-center rounded-lg shadow-xl"
+                    data-alt="Tea pickers in traditional clothing harvesting tea leaves in a vibrant field"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBv-EVdFTaFBnBTH_FyrNUxs2YDWj8-rkqNo_mU0gXlzIgKeEjBhZjeB1f8W8EHYIjGmfZ7zAXsxAawdaX0Sq1Mz95DsMCQweEy0PCORSljzCnZPwG1UF-AygGk1vG68k5-9rZ89MV1N_7qIpglcfwvWY9C5dy6gGRGJzdUCoahup_sTKWRupQvkSuzXBBmjb186VtL84UcRovLP74prpD8dHeJQVRZFNGDf_8VNoEsamDlEZI6gwJulKXKKWZa4L8d_pKlRo7jykOQ");'>
+                </div>
+            </div>
+            <div class="space-y-8">
+                <div
+                    class="inline-block px-4 py-1.5 bg-primary/20 text-primary font-bold text-xs uppercase tracking-widest rounded-full">
+                    Our Story</div>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-100 leading-tight">From
+                    the Ancient Gardens of Sylhet</h2>
+                <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+                    Our narrative begins in the lush estates of Sylhet and Panchagarh, where heritage meets quality. For
+                    generations, the mineral-rich soil and unique microclimates of Bangladesh have nurtured the world's
+                    most aromatic tea leaves.
+                </p>
+                <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+                    At Bahari Ponno, we believe in preserving the artisanal methods of tea production. Every leaf is
+                    hand-picked at the peak of freshness, ensuring that the natural aroma and premium profile of our
+                    historic gardens are delivered directly to your cup.
+                </p>
+                <div class="flex items-center gap-4 pt-4">
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-bold text-primary">100+</span>
+                        <span class="text-sm font-medium text-slate-500">Heritage Growers</span>
+                    </div>
+                    <div class="w-px h-10 bg-slate-200 dark:bg-slate-700"></div>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-bold text-primary">1952</span>
+                        <span class="text-sm font-medium text-slate-500">Original Roots</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Regions Section -->
+    <section id="regions" class="py-24 bg-white dark:bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-20">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold mb-4">Our Sourcing Regions</h2>
+                <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">Explore the diverse landscapes where our
+                    premium tea varieties are cultivated with care.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Region 1 -->
+                <div
+                    class="bg-background-light dark:bg-background-dark p-8 rounded-lg border border-primary/5 hover:border-primary transition-colors group">
+                    <div
+                        class="size-14 bg-primary/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+                        <span
+                            class="material-symbols-outlined text-primary group-hover:text-background-dark text-3xl">map</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Sylhet</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">The historic heart of
+                        tea. Known for its deep, malty flavors and time-honored estates that date back over a century.
+                    </p>
+                    <span class="text-primary text-xs font-bold uppercase tracking-widest flex items-center gap-1">
+                        Explore Region <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </span>
+                </div>
+                <!-- Region 2 -->
+                <div
+                    class="bg-background-light dark:bg-background-dark p-8 rounded-lg border border-primary/5 hover:border-primary transition-colors group">
+                    <div
+                        class="size-14 bg-primary/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+                        <span
+                            class="material-symbols-outlined text-primary group-hover:text-background-dark text-3xl">eco</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Sreemangal</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">The tea capital of
+                        Bangladesh. Home to the legendary seven-layer tea and world-class rain-fed plantations.</p>
+                    <span class="text-primary text-xs font-bold uppercase tracking-widest flex items-center gap-1">
+                        Explore Region <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </span>
+                </div>
+                <!-- Region 3 -->
+                <div
+                    class="bg-background-light dark:bg-background-dark p-8 rounded-lg border border-primary/5 hover:border-primary transition-colors group">
+                    <div
+                        class="size-14 bg-primary/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+                        <span
+                            class="material-symbols-outlined text-primary group-hover:text-background-dark text-3xl">terrain</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Panchagarh</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">The emerging northern
+                        frontier. Nestled near the foothills of the Himalayas, offering a unique high-altitude profile.
+                    </p>
+                    <span class="text-primary text-xs font-bold uppercase tracking-widest flex items-center gap-1">
+                        Explore Region <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Values Section -->
+    <section class="py-16 bg-primary">
+        <div class="max-w-7xl mx-auto px-6 lg:px-20 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div class="flex items-center gap-4 text-background-dark">
+                <span class="material-symbols-outlined text-4xl">energy_savings_leaf</span>
+                <div>
+                    <h4 class="font-bold text-lg leading-none">Sustainably Sourced</h4>
+                    <p class="text-sm font-medium opacity-80 mt-1">Ethical farming practices</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4 text-background-dark">
+                <span class="material-symbols-outlined text-4xl">verified_user</span>
+                <div>
+                    <h4 class="font-bold text-lg leading-none">Premium Quality</h4>
+                    <p class="text-sm font-medium opacity-80 mt-1">Export-grade processing</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4 text-background-dark">
+                <span class="material-symbols-outlined text-4xl">diversity_3</span>
+                <div>
+                    <h4 class="font-bold text-lg leading-none">Community First</h4>
+                    <p class="text-sm font-medium opacity-80 mt-1">Supporting local harvesters</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 lg:px-20 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+            <!-- Form -->
+            <div class="lg:col-span-7">
+                <h2 class="text-4xl font-extrabold mb-8">Send a Message</h2>
+                <form action="#" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm font-bold text-slate-700 dark:text-slate-300">Full Name</label>
+                        <input
+                            class="w-full bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary"
+                            placeholder="John Doe" type="text" />
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm font-bold text-slate-700 dark:text-slate-300">Email Address</label>
+                        <input
+                            class="w-full bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary"
+                            placeholder="john@example.com" type="email" />
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm font-bold text-slate-700 dark:text-slate-300">Phone Number</label>
+                        <div class="flex items-center">
+                            <span
+                                class="bg-slate-100 dark:bg-slate-700 border border-r-0 border-slate-200 dark:border-slate-600 px-3 py-3 rounded-l-lg text-sm text-slate-500 font-bold">+880</span>
+                            <input
+                                class="w-full bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-r-lg p-3 focus:ring-primary focus:border-primary"
+                                placeholder="1712345678" type="tel" />
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm font-bold text-slate-700 dark:text-slate-300">Subject</label>
+                        <select
+                            class="w-full bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary">
+                            <option>Wholesale Inquiry</option>
+                            <option>Product Support</option>
+                            <option>Visit Tasting Room</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-2 md:col-span-2">
+                        <label class="text-sm font-bold text-slate-700 dark:text-slate-300">Message</label>
+                        <textarea
+                            class="w-full bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary"
+                            placeholder="Tell us how we can help..." rows="5"></textarea>
+                    </div>
+                    <div class="md:col-span-2">
+                        <button
+                            class="w-full md:w-auto bg-primary text-background-dark px-10 py-4 rounded-lg font-extrabold text-base hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+                            type="submit">
+                            Send Message <span class="material-symbols-outlined">send</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!-- Contact Info -->
+            <div class="lg:col-span-5 space-y-8">
+                <div
+                    class="bg-white dark:bg-slate-800 p-10 rounded-lg shadow-sm border border-slate-100 dark:border-slate-700">
+                    <h3 class="text-2xl font-extrabold mb-8">Visit Our Tasting Room</h3>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="size-10 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary">location_on</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-slate-100">Banani HQ &amp; Store</h4>
+                                <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mt-1">
+                                    House 42, Road 11, Block C,<br />
+                                    Banani, Dhaka 1213, Bangladesh
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="size-10 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary">call</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-slate-100">Customer Service</h4>
+                                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">+880 123 456 7890</p>
+                                <p class="text-sm text-slate-500 dark:text-slate-400">Available: 9 AM - 6 PM (Sun-Thu)
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="size-10 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary">mail</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-slate-100">Email Us</h4>
+                                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">hello@bahariponno.com</p>
+                                <p class="text-sm text-slate-500 dark:text-slate-400">wholesale@bahariponno.com</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="size-10 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary">schedule</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-slate-100">Opening Hours</h4>
+                                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Mon - Fri: 10:00 - 20:00</p>
+                                <p class="text-sm text-slate-500 dark:text-slate-400">Sat: 11:00 - 18:00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-10 pt-8 border-t border-slate-100 dark:border-slate-700">
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Follow Our Journey
+                        </p>
+                        <div class="flex gap-4">
+                            <a class="size-10 bg-slate-50 dark:bg-slate-700 rounded-full flex items-center justify-center hover:bg-primary hover:text-background-dark transition-all"
+                                href="#">
+                                <span class="material-symbols-outlined text-lg">public</span>
+                            </a>
+                            <a class="size-10 bg-slate-50 dark:bg-slate-700 rounded-full flex items-center justify-center hover:bg-primary hover:text-background-dark transition-all"
+                                href="#">
+                                <span class="material-symbols-outlined text-lg">photo_camera</span>
+                            </a>
+                            <a class="size-10 bg-slate-50 dark:bg-slate-700 rounded-full flex items-center justify-center hover:bg-primary hover:text-background-dark transition-all"
+                                href="#">
+                                <span class="material-symbols-outlined text-lg">videocam</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Map Section Placeholder -->
+    <section
+        class="w-full h-[400px] bg-slate-200 dark:bg-slate-800 relative grayscale hover:grayscale-0 transition-all duration-500 overflow-hidden">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center">
+                <span class="material-symbols-outlined text-6xl text-primary animate-bounce">location_on</span>
+                <p class="font-bold text-slate-500 mt-4">Interactive Map Loading...</p>
+            </div>
+        </div>
+        <div class="w-full h-full bg-cover bg-center opacity-30"
+            data-alt="Map showing the location of Banani district in Dhaka" data-location="Dhaka, Bangladesh"
+            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBMcKhn5X7MdOTIUgF1PPzhQt6taTUpc7q0T6_56TblAtX6yX7uP5HFnNJScM5gaHzVzdcaeni-IeXIF6JMUW66mCeRT9OqkkVakKrQy2P4HDWj6I1qqafvcHtIm2RoPZIqZp_h71ZEIDOeqWrMrT1fKfjNLxgCEzCj122mfy1ObxSZNS-telkeWJu3x0I6ujfnEAnUEPBesxTLThMMSSuDoFsKGF9FIgtvJtfXV3BQe4O4plwIaDcLpkrOB7wlHdHn-7C3ULbn6tCL");'>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-background-dark text-white py-16 px-6 lg:px-20">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="flex items-center gap-2">
+                <div class="bg-primary p-1 rounded-lg">
+                    <span class="material-symbols-outlined text-background-dark text-sm">spa</span>
+                </div>
+                <h2 class="text-lg font-bold">Bahari Ponno</h2>
+            </div>
+            <div class="flex gap-8 text-sm font-medium text-white/60">
+                <a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+                <a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+                <a class="hover:text-primary transition-colors" href="#">Shipping</a>
+            </div>
+            <p class="text-sm text-white/40">© 2024 Bahari Ponno. Premium Artisanal Tea.</p>
+        </div>
+    </footer>
+    <script src="api.js"></script>
+</body>
+
+</html>

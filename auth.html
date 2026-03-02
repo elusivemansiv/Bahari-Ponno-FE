@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Bahari Ponno - Login &amp; Register</title>
+    <meta name="description"
+        content="Sign in or create a Bahari Ponno account to start ordering premium Bangladeshi tea.">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec5b",
+                        "background-light": "#fdfdfb",
+                        "background-dark": "#102216",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1.5rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: "Plus Jakarta Sans", sans-serif
+        }
+
+        .bg-blur-tea {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(https://lh3.googleusercontent.com/aida-public/AB6AXuAWHIWpfJ8K7prXWy-dnahXstWh_J2ncyhxVqXxNTdMwcQ3XPyD_BlAghaUz72nHfxnW4uVi0jMfJPOA5C_fD51xgehc8mIWETTlLAdadE4Cxh8pT8eEJQrsDJKuMyE7QvHh-rkJp-qHM1jUnAWnsvj6vhmUFyxR5ZCkcV4MopLwoOoBw11zLgSv38y3jN9MudfVNOnIjyr0rwpIyek-R8Zz2qye19UGkkBM10T3zbvsU1e_qzcjmUUAON3LQhUkAp2c_IP5aayhYqK);
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            transform: scale(1.1)
+        }
+
+        .input-err {
+            border-color: #ef4444 !important;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+    <!-- Background Layer -->
+    <div class="bg-blur-tea"></div>
+    <!-- Navigation -->
+    <header
+        class="sticky top-0 z-50 w-full bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="bg-primary p-2 rounded-lg">
+                    <span class="material-symbols-outlined text-background-dark">eco</span>
+                </div>
+                <h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Bahari <span
+                        class="text-primary">Ponno</span></h1>
+            </a>
+            <!-- Nav Links -->
+            <nav class="hidden md:flex items-center gap-10">
+                <a class="text-sm font-semibold hover:text-primary transition-colors" href="index.html">Home</a>
+                <a class="text-sm font-semibold hover:text-primary transition-colors" href="about.html">About &amp;
+                    Contact</a>
+                <a class="nav-login-link text-sm font-semibold text-primary" href="#">Login/Register</a>
+                <span class="nav-user-menu hidden text-sm font-semibold text-slate-700 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-base">account_circle</span>
+                    <span class="nav-user-name"></span>
+                    <button onclick="UserAPI.logout()"
+                        class="ml-2 text-xs text-red-400 hover:text-red-600 transition-colors">(Logout)</button>
+                </span>
+            </nav>
+            <!-- Actions -->
+            <div class="flex items-center gap-4">
+                <button class="md:hidden p-2 text-slate-700 dark:text-slate-300 hover:text-primary transition-colors"
+                    onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <a href="checkout.html"
+                    class="relative p-2 rounded-full bg-primary/10 text-slate-900 dark:text-white hover:bg-primary/20 transition-all block">
+                    <span class="material-symbols-outlined">shopping_bag</span>
+                    <span id="cart-badge-nav"
+                        class="cart-badge absolute top-0 right-0 bg-primary text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full text-background-dark">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu"
+        class="hidden md:hidden bg-white/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-primary/10 px-6 py-4 space-y-4 fixed top-20 w-full z-40 shadow-md">
+        <a class="block py-2 text-base font-semibold hover:text-primary transition-colors" href="index.html">Home</a>
+        <a class="block py-2 text-base font-semibold hover:text-primary transition-colors" href="about.html">About &amp;
+            Contact</a>
+        <a class="nav-login-link block py-2 text-base font-semibold text-primary transition-colors"
+            href="#">Login/Register</a>
+    </div>
+    <!-- Auth Main Section -->
+    <main class="flex-grow flex items-center justify-center p-6">
+        <div
+            class="w-full max-w-[480px] bg-white dark:bg-slate-900 rounded-lg shadow-2xl overflow-hidden border border-slate-100 dark:border-slate-800">
+            <!-- Tabs -->
+            <div class="flex border-b border-slate-100 dark:border-slate-800">
+                <button id="login-tab"
+                    class="flex-1 py-5 text-sm font-bold border-b-[3px] border-primary text-slate-900 dark:text-white transition-all">
+                    Login
+                </button>
+                <button id="register-tab"
+                    class="flex-1 py-5 text-sm font-bold border-b-[3px] border-transparent text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-all">
+                    Register
+                </button>
+            </div>
+            <!-- Content Area -->
+            <div class="p-8">
+                <!-- Error Banner -->
+                <div id="auth-error"
+                    class="hidden mb-4 px-4 py-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-600 dark:text-red-400 text-sm font-medium">
+                </div>
+                <!-- Success Banner -->
+                <div id="auth-success"
+                    class="hidden mb-4 px-4 py-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg text-green-700 dark:text-green-400 text-sm font-medium">
+                </div>
+
+                <!-- Login View -->
+                <div id="login-view">
+                    <h2 class="text-2xl font-bold mb-2">Welcome Back</h2>
+                    <p class="text-slate-500 text-sm mb-8">Enter your credentials to access your account</p>
+                    <form id="login-form" class="space-y-5" novalidate>
+                        <!-- Username / Email Field -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-semibold text-slate-700 dark:text-slate-300"
+                                for="login-username">Username or Email</label>
+                            <div class="relative">
+                                <span
+                                    class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">person</span>
+                                <input id="login-username"
+                                    class="w-full pl-12 pr-4 py-3.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all"
+                                    placeholder="your_username" type="text" autocomplete="username" required />
+                            </div>
+                        </div>
+                        <!-- Password Field -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <label class="text-sm font-semibold text-slate-700 dark:text-slate-300"
+                                    for="login-password">Password</label>
+                            </div>
+                            <div class="relative">
+                                <span
+                                    class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">lock</span>
+                                <input id="login-password"
+                                    class="w-full pl-12 pr-12 py-3.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all"
+                                    placeholder="••••••••" type="password" autocomplete="current-password" required />
+                                <button
+                                    class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors"
+                                    type="button" onclick="togglePassword('login-password', this)">
+                                    <span class="material-symbols-outlined">visibility</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Login Button -->
+                        <button id="login-btn" type="submit"
+                            class="w-full bg-primary hover:bg-primary/90 text-background-dark font-bold py-4 rounded-lg shadow-lg shadow-primary/20 transition-all transform active:scale-[0.98] flex items-center justify-center gap-2">
+                            <span id="login-spinner"
+                                class="hidden material-symbols-outlined animate-spin text-xl">progress_activity</span>
+                            Login to Account
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Register View -->
+                <div id="register-view" class="hidden">
+                    <h2 class="text-2xl font-bold mb-2">Create Account</h2>
+                    <p class="text-slate-500 text-sm mb-6">Join Bahari Ponno for exclusive tea collections</p>
+                    <form id="register-form" class="space-y-4" novalidate>
+                        <div class="space-y-2">
+                            <label class="text-sm font-semibold text-slate-700 dark:text-slate-300"
+                                for="reg-username">Username</label>
+                            <input id="reg-username"
+                                class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+                                placeholder="john_doe" type="text" autocomplete="username" required />
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-semibold text-slate-700 dark:text-slate-300"
+                                for="reg-email">Email
+                                Address</label>
+                            <input id="reg-email"
+                                class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+                                placeholder="name@example.com" type="email" autocomplete="email" required />
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-semibold text-slate-700 dark:text-slate-300"
+                                for="reg-phone">Phone (+880)</label>
+                            <input id="reg-phone"
+                                class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+                                placeholder="17XXXXXXXX" type="tel" autocomplete="tel" />
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-semibold text-slate-700 dark:text-slate-300"
+                                for="reg-password">Password</label>
+                            <div class="relative">
+                                <input id="reg-password"
+                                    class="w-full px-4 pr-12 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+                                    placeholder="••••••••" type="password" autocomplete="new-password" required />
+                                <button
+                                    class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors"
+                                    type="button" onclick="togglePassword('reg-password', this)">
+                                    <span class="material-symbols-outlined">visibility</span>
+                                </button>
+                            </div>
+                        </div>
+                        <button id="register-btn" type="submit"
+                            class="w-full bg-primary hover:bg-primary/90 text-background-dark font-bold py-4 rounded-lg shadow-lg shadow-primary/20 transition-all transform active:scale-[0.98] mt-4 flex items-center justify-center gap-2">
+                            <span id="reg-spinner"
+                                class="hidden material-symbols-outlined animate-spin text-xl">progress_activity</span>
+                            Create Free Account
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-white/90 dark:bg-background-dark/90 py-8 border-t border-primary/10 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-slate-500 text-sm">
+                &copy; 2024 Bahari Ponno. Premium Bangladeshi Tea. All rights reserved.
+            </div>
+            <div class="flex gap-6 text-sm font-medium text-slate-500">
+                <a class="hover:text-primary" href="#">Privacy Policy</a>
+                <a class="hover:text-primary" href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div id="toast"
+        class="fixed bottom-6 right-6 transform translate-y-24 opacity-0 transition-all duration-300 z-50 flex items-center gap-3 bg-forest text-white px-6 py-4 rounded-xl shadow-2xl bg-slate-900">
+        <div class="bg-primary p-1 rounded-full flex items-center justify-center text-background-dark">
+            <span class="material-symbols-outlined text-sm font-bold">check</span>
+        </div>
+        <div>
+            <p class="toast-msg font-bold text-sm">Success</p>
+            <p class="toast-sub text-xs text-white/70"></p>
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script>
+        // ── Tab Switching ─────────────────────────────────────────────────────
+        const loginTab = document.getElementById('login-tab');
+        const registerTab = document.getElementById('register-tab');
+        const loginView = document.getElementById('login-view');
+        const registerView = document.getElementById('register-view');
+
+        loginTab.addEventListener('click', () => {
+            loginTab.classList.add('border-primary', 'text-slate-900', 'dark:text-white');
+            loginTab.classList.remove('border-transparent', 'text-slate-400');
+            registerTab.classList.remove('border-primary', 'text-slate-900', 'dark:text-white');
+            registerTab.classList.add('border-transparent', 'text-slate-400');
+            loginView.classList.remove('hidden');
+            registerView.classList.add('hidden');
+            clearMessages();
+        });
+
+        registerTab.addEventListener('click', () => {
+            registerTab.classList.add('border-primary', 'text-slate-900', 'dark:text-white');
+            registerTab.classList.remove('border-transparent', 'text-slate-400');
+            loginTab.classList.remove('border-primary', 'text-slate-900', 'dark:text-white');
+            loginTab.classList.add('border-transparent', 'text-slate-400');
+            registerView.classList.remove('hidden');
+            loginView.classList.add('hidden');
+            clearMessages();
+        });
+
+        // ── Helpers ───────────────────────────────────────────────────────────
+        function showError(msg) {
+            const el = document.getElementById('auth-error');
+            el.textContent = msg;
+            el.classList.remove('hidden');
+            document.getElementById('auth-success').classList.add('hidden');
+        }
+
+        function showSuccess(msg) {
+            const el = document.getElementById('auth-success');
+            el.textContent = msg;
+            el.classList.remove('hidden');
+            document.getElementById('auth-error').classList.add('hidden');
+        }
+
+        function clearMessages() {
+            document.getElementById('auth-error').classList.add('hidden');
+            document.getElementById('auth-success').classList.add('hidden');
+        }
+
+        function setLoading(spinnerId, btnId, loading) {
+            document.getElementById(spinnerId).classList.toggle('hidden', !loading);
+            document.getElementById(btnId).disabled = loading;
+        }
+
+        function togglePassword(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const icon = btn.querySelector('.material-symbols-outlined');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.textContent = 'visibility_off';
+            } else {
+                input.type = 'password';
+                icon.textContent = 'visibility';
+            }
+        }
+
+        function flattenErrors(errData) {
+            if (typeof errData === 'string') return errData;
+            if (errData.detail) return errData.detail;
+            return Object.entries(errData)
+                .map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(', ') : v}`)
+                .join(' | ');
+        }
+
+        // ── Login Form ───────────────────────────────────────────────────────
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            clearMessages();
+            const username = document.getElementById('login-username').value.trim();
+            const password = document.getElementById('login-password').value;
+            if (!username || !password) return showError('Please enter your username and password.');
+            setLoading('login-spinner', 'login-btn', true);
+            try {
+                await UserAPI.login(username, password);
+                showSuccess('Logged in! Redirecting…');
+                setTimeout(() => { window.location.href = 'index.html'; }, 800);
+            } catch (err) {
+                showError(flattenErrors(err.data) || 'Login failed. Check your credentials.');
+            } finally {
+                setLoading('login-spinner', 'login-btn', false);
+            }
+        });
+
+        // ── Register Form ────────────────────────────────────────────────────
+        document.getElementById('register-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            clearMessages();
+            const username = document.getElementById('reg-username').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const phone = document.getElementById('reg-phone').value.trim();
+            const password = document.getElementById('reg-password').value;
+            if (!username || !email || !password) return showError('Username, email and password are required.');
+            setLoading('reg-spinner', 'register-btn', true);
+            try {
+                await UserAPI.register({ username, email, phone, password });
+                showSuccess('Account created! Please log in.');
+                setTimeout(() => {
+                    loginTab.click();
+                    document.getElementById('login-username').value = username;
+                }, 1200);
+            } catch (err) {
+                showError(flattenErrors(err.data) || 'Registration failed. Please try again.');
+            } finally {
+                setLoading('reg-spinner', 'register-btn', false);
+            }
+        });
+
+        // ── If already logged in, redirect home ──────────────────────────────
+        if (Auth.isLoggedIn()) {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+
+</html>

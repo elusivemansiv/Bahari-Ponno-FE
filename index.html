@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Bahari Ponno - Premium Tea Collection</title>
+    <meta name="description"
+        content="Shop premium Bangladeshi tea — Black, Green, Oolong and more, sourced from the gardens of Sreemangal and Sylhet.">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec5b",
+                        "forest": "#1a432b",
+                        "ivory": "#fdfcf8",
+                        "background-light": "#fdfcf8",
+                        "background-dark": "#102216",
+                    },
+                    fontFamily: {
+                        "sans": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "12": "0.75rem",
+                    }
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-ivory font-sans;
+            }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        @keyframes pulse-skeleton {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.4; }
+        }
+        .skeleton { animation: pulse-skeleton 1.5s ease-in-out infinite; }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+    <header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-slate-100">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-2">
+                    <div class="bg-primary p-2 rounded-lg">
+                        <span class="material-symbols-outlined text-background-dark">eco</span>
+                    </div>
+                    <h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Bahari <span
+                            class="text-primary">Ponno</span></h1>
+                </a>
+                <nav class="hidden md:flex items-center gap-10">
+                    <a class="text-sm font-semibold text-slate-900 hover:text-primary transition-colors"
+                        href="index.html">Home</a>
+                    <a class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors"
+                        href="about.html">About &amp; Contact</a>
+                    <!-- Login link (shown when logged out) -->
+                    <a class="nav-login-link text-sm font-semibold text-slate-600 hover:text-primary transition-colors"
+                        href="auth.html">Login/Register</a>
+                    <!-- User menu (shown when logged in) -->
+                    <span class="nav-user-menu hidden text-sm font-semibold text-slate-700 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-base">account_circle</span>
+                        <span class="nav-user-name"></span>
+                        <a href="dashboard.html" class="ml-1 text-xs text-primary hover:underline">(Dashboard)</a>
+                        <button onclick="UserAPI.logout()"
+                            class="ml-1 text-xs text-red-400 hover:text-red-600 transition-colors">(Logout)</button>
+                    </span>
+                </nav>
+                <div class="flex items-center">
+                    <button class="md:hidden p-2 text-slate-700 hover:text-primary transition-colors mr-2"
+                        onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+                    <a href="checkout.html"
+                        class="relative p-2 text-slate-700 hover:bg-slate-50 rounded-full transition-colors block">
+                        <span class="material-symbols-outlined">shopping_cart</span>
+                        <span id="cart-badge"
+                            class="cart-badge absolute top-1 right-1 size-5 bg-primary text-forest text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white transition-transform duration-300">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu"
+        class="hidden md:hidden bg-white/95 backdrop-blur-md border-b border-slate-100 px-6 py-4 space-y-4 fixed top-16 w-full z-40 shadow-md">
+        <a class="block py-2 text-base font-semibold hover:text-primary transition-colors" href="index.html">Home</a>
+        <a class="block py-2 text-base font-semibold hover:text-primary transition-colors" href="about.html">About &amp;
+            Contact</a>
+        <a class="nav-login-link block py-2 text-base font-semibold text-primary transition-colors"
+            href="auth.html">Login/Register</a>
+    </div>
+    <section class="relative h-[30vh] min-h-[240px] w-full overflow-hidden">
+        <div class="absolute inset-0 bg-black/30 z-10"></div>
+        <div class="absolute inset-0 bg-cover bg-center"
+            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAqoorwpzDproXwsKN4RmA4T3Jt6ZjtiOrrP8v3srOozcLezS8cjVoSRH7IdRO0jcclMCVGVeC0M_fVWmyZl310OvEx6E8YFC3axs4AVfHY2_bgbkhr0ol7qDdx9wMVuU37yJSonZUproaJeuYfRSS1hiPS08j219Fm_G5w0SkUVAsh_7s40efoVCsmPfQc0GC0LsUuBnRvFdMZWMvwyrWRoFMCArdWF4Dh6usNkCYTWoPg_UpaOuzfFy9OdC0lwlm8s1_IxNdN91Sk');">
+        </div>
+        <div class="relative z-20 h-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
+            <div class="max-w-2xl">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-2 tracking-tight">Exquisite Teas from
+                    Bangladesh</h1>
+                <p class="text-white/90 text-lg">Directly from the finest gardens to your cup.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Bar -->
+    <section class="bg-white border-b border-slate-100 py-4 shadow-sm relative z-30">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap items-center gap-4 lg:gap-8">
+                <div class="flex items-center gap-3">
+                    <label class="text-xs font-bold uppercase text-slate-400 tracking-wider">Filter By:</label>
+                    <select id="filter-category"
+                        class="bg-ivory border-none text-sm font-semibold rounded-12 focus:ring-2 focus:ring-primary/50 pr-8">
+                        <option value="">All Types</option>
+                        <option value="Black Tea">Black Tea</option>
+                        <option value="Green Tea">Green Tea</option>
+                        <option value="Oolong">Oolong</option>
+                        <option value="Masala">Masala Chai</option>
+                    </select>
+                </div>
+                <div class="ml-auto hidden lg:block">
+                    <p class="text-sm text-slate-500">Showing <span id="product-count"
+                            class="font-bold text-slate-900">…</span> Products</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1">
+        <div class="mb-8">
+            <h2 class="text-3xl font-extrabold text-slate-900">Featured Products</h2>
+            <div class="h-1.5 w-20 bg-primary mt-2 rounded-full"></div>
+        </div>
+
+        <!-- Error state -->
+        <div id="products-error" class="hidden text-center py-16">
+            <span class="material-symbols-outlined text-6xl text-slate-300 mb-4 block">wifi_off</span>
+            <p class="text-slate-500 font-semibold text-lg">Could not load products.</p>
+            <p class="text-slate-400 text-sm mt-1">Make sure the backend server is running on <code
+                    class="bg-slate-100 px-1 rounded">http://127.0.0.1:8000</code></p>
+            <button onclick="loadProducts()"
+                class="mt-6 px-6 py-2 bg-primary text-forest font-bold rounded-12 hover:bg-primary/90 transition-colors">
+                Retry
+            </button>
+        </div>
+
+        <!-- Product grid -->
+        <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Skeleton placeholders -->
+            <div class="skeleton bg-white rounded-12 p-4 shadow-sm border border-slate-100 h-96"></div>
+            <div class="skeleton bg-white rounded-12 p-4 shadow-sm border border-slate-100 h-96"></div>
+            <div class="skeleton bg-white rounded-12 p-4 shadow-sm border border-slate-100 h-96"></div>
+        </div>
+    </main>
+
+    <footer class="mt-auto bg-white border-t border-slate-100 py-10">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex justify-center mb-6">
+                <div class="flex items-center gap-2 text-forest">
+                    <span class="material-symbols-outlined">eco</span>
+                    <span class="font-bold">Bahari Ponno</span>
+                </div>
+            </div>
+            <p class="text-slate-500 text-sm mb-4">&copy; 2026 Bahari Ponno Tea Co. Premium Bangladeshi Teas.</p>
+            <div class="flex justify-center gap-6 text-slate-400">
+                <a class="hover:text-primary transition-colors" href="#">Privacy</a>
+                <a class="hover:text-primary transition-colors" href="#">Terms</a>
+                <a class="hover:text-primary transition-colors" href="#">Shipping</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast"
+        class="fixed bottom-6 right-6 transform translate-y-24 opacity-0 transition-all duration-300 z-50 flex items-center gap-3 bg-forest text-white px-6 py-4 rounded-xl shadow-2xl">
+        <div class="bg-primary p-1 rounded-full flex items-center justify-center text-forest">
+            <span class="material-symbols-outlined text-sm font-bold">check</span>
+        </div>
+        <div>
+            <p class="toast-msg font-bold text-sm">Added to Cart</p>
+            <p class="toast-sub text-xs text-white/70">Item successfully added to your cart</p>
+        </div>
+        <button
+            onclick="document.getElementById('toast').classList.replace('translate-y-0','translate-y-24');document.getElementById('toast').classList.replace('opacity-100','opacity-0');"
+            class="ml-4 text-white/50 hover:text-white transition-colors">
+            <span class="material-symbols-outlined text-sm">close</span>
+        </button>
+    </div>
+
+    <script src="api.js"></script>
+    <script>
+        // ── State ─────────────────────────────────────────────────────────────
+        let allProducts = [];
+
+        // ── Render helpers ────────────────────────────────────────────────────
+        function starRating(n) {
+            let html = '';
+            for (let i = 0; i < 5; i++) {
+                html += `<span class="material-symbols-outlined ${i < Math.round(n) ? 'text-yellow-400' : 'text-slate-300'} text-sm icon-filled">star</span>`;
+            }
+            return html;
+        }
+
+        function getDefaultVariant(product) {
+            return product.variants && product.variants.length > 0 ? product.variants[0] : null;
+        }
+
+        function productCard(product) {
+            const variant = getDefaultVariant(product);
+            const price = variant ? formatTaka(variant.price) : 'N/A';
+            const variantId = variant ? variant.id : null;
+            const inStock = variant && variant.stock_quantity > 0;
+            const imgSrc = product.image_url || 'https://lh3.googleusercontent.com/aida-public/AB6AXuCgdxYjc8WAW6xcnXj_3hpHY9harkI2BYWLUHEqJomTkbVFuVjHgPNxaYuu7krlOWguJdtNTBlXTwW7aXwlO7x7mf9y1P0wbtVl5enlpkC0ZU6hJmhOQ0r2eZPcbpWpoicjGiuiaIU3vJbuq2Dc_zBsrt8LWPrVuEJFSB9kkQvmlv3bVI0Eli99nn0qc_2xdq6x0bCkPwUVmTR2QuuU-1huR8M9UXxHY_3Z3rdXl4-0n3Iy3jYbGtDvHIvoXeatMXUH7UT4cP17uEG6';
+
+            return `
+            <div class="bg-white rounded-12 p-4 shadow-sm border border-slate-100 hover:shadow-md transition-shadow group" data-product-id="${product.id}">
+                <a href="product.html?id=${product.id}" class="aspect-square rounded-12 overflow-hidden mb-4 bg-slate-50 block">
+                    <img alt="${product.name}"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        src="${imgSrc}"
+                        onerror="this.src='https://placehold.co/400x400/f0fdf4/166534?text=Tea'" />
+                </a>
+                <div class="flex flex-col gap-1">
+                    <h3 class="text-lg font-bold text-slate-900">${product.name}</h3>
+                    <p class="text-xs text-slate-400 font-medium uppercase tracking-wide mb-1">${product.category}</p>
+                    <div class="flex items-center gap-0.5 mb-2">
+                        ${starRating(4.5)}
+                        <span class="text-xs text-slate-400 ml-1">(4.5)</span>
+                    </div>
+                    <div class="text-xl font-extrabold text-forest mb-4">${price}</div>
+                    ${inStock ? `
+                    <div class="flex flex-col gap-2">
+                        <button onclick='handleAddToCart(${JSON.stringify({ id: product.id, variantId, name: product.name, amount: variant?.amount, price: variant?.price, image: imgSrc })})'
+                            class="w-full bg-primary hover:bg-[#0fd952] text-forest font-bold py-2.5 rounded-12 flex items-center justify-center gap-2 transition-colors">
+                            <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+                            Add to Cart
+                        </button>
+                        <div class="grid grid-cols-2 gap-2">
+                            <a href="checkout.html"
+                                class="bg-forest text-white hover:bg-forest/90 font-bold py-2 rounded-12 transition-colors flex items-center justify-center">
+                                Buy Now
+                            </a>
+                            <a href="product.html?id=${product.id}"
+                                class="border-2 border-forest text-forest hover:bg-forest/5 font-bold py-2 rounded-12 transition-colors flex items-center justify-center">
+                                Details
+                            </a>
+                        </div>
+                    </div>
+                    ` : `
+                    <div class="py-2 text-center text-sm font-semibold text-slate-400 bg-slate-100 rounded-12">Out of Stock</div>
+                    <a href="product.html?id=${product.id}"
+                        class="border-2 border-forest text-forest hover:bg-forest/5 font-bold py-2 rounded-12 transition-colors flex items-center justify-center mt-2">
+                        Details
+                    </a>
+                    `}
+                </div>
+            </div>`;
+        }
+
+        function renderGrid(products) {
+            const grid = document.getElementById('product-grid');
+            document.getElementById('product-count').textContent = products.length;
+            if (products.length === 0) {
+                grid.innerHTML = `<div class="col-span-3 text-center py-16 text-slate-400 font-semibold">No products found.</div>`;
+                return;
+            }
+            grid.innerHTML = products.map(productCard).join('');
+        }
+
+        // ── Cart ──────────────────────────────────────────────────────────────
+        function handleAddToCart(item) {
+            Cart.addItem({ variantId: item.variantId, productId: item.id, name: item.name, amount: item.amount, price: item.price, image: item.image });
+            showToast('Added to Cart', item.name);
+        }
+
+        // ── Filtering ─────────────────────────────────────────────────────────
+        document.getElementById('filter-category').addEventListener('change', function () {
+            const cat = this.value.toLowerCase();
+            const filtered = cat
+                ? allProducts.filter(p => p.category.toLowerCase().includes(cat))
+                : allProducts;
+            renderGrid(filtered);
+        });
+
+        // ── Load products ─────────────────────────────────────────────────────
+        async function loadProducts() {
+            document.getElementById('products-error').classList.add('hidden');
+            document.getElementById('product-grid').innerHTML = `
+                <div class="skeleton bg-white rounded-12 p-4 shadow-sm border border-slate-100 h-96"></div>
+                <div class="skeleton bg-white rounded-12 p-4 shadow-sm border border-slate-100 h-96"></div>
+                <div class="skeleton bg-white rounded-12 p-4 shadow-sm border border-slate-100 h-96"></div>
+            `;
+            try {
+                const data = await ProductAPI.list();
+                // Support both paginated (data.results) and plain array responses
+                allProducts = Array.isArray(data) ? data : (data.results || []);
+                // Only show active products
+                allProducts = allProducts.filter(p => p.status === 'Active');
+                renderGrid(allProducts);
+            } catch (err) {
+                console.error('Failed to load products', err);
+                document.getElementById('product-grid').innerHTML = '';
+                document.getElementById('products-error').classList.remove('hidden');
+            }
+        }
+
+        loadProducts();
+    </script>
+</body>
+
+</html>
