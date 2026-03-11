@@ -4,7 +4,7 @@
  * All pages import this via <script src="api.js"></script>
  */
 
-const API_BASE = 'https://bahari-ponno-be-production.up.railway.app/api';
+const API_BASE = 'http://127.0.0.1:8000/api';
 
 // ─── Token Helpers ────────────────────────────────────────────────────────────
 const Auth = {
