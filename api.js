@@ -4,7 +4,9 @@
  * All pages import this via <script src="api.js"></script>
  */
 
-const API_BASE = 'http://127.0.0.1:8000/api';
+const API_BASE = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost' 
+    ? 'http://127.0.0.1:8000/api' 
+    : 'https://bahari-ponno-be-production.up.railway.app/api';
 
 // ─── Token Helpers ────────────────────────────────────────────────────────────
 const Auth = {
